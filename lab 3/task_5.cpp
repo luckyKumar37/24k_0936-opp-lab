@@ -16,7 +16,7 @@ class Musicplayer{
                 if(Playlist[i]==s){
                     found=true;
                     for(int j=i;j<p;j++){
-                        Playlist[i]=Playlist[i+1];
+                        Playlist[j]=Playlist[j+1];
                     }
                     p--;
                     cout<<"The song "<<s<<" has been removed from the playlist\n";
