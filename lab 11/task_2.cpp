@@ -2,30 +2,10 @@
 using namespace std;
 
 class QueueoverflowException : public exception
-{
-private:
-    string message;
-
-public:
-    QueueoverflowException(const string &msg) : message(msg) {}
-    const char* what() const noexcept override
-    {
-        return message.c_str();
-    }
-
-};
+{};
 
 class QueueunderflowException : public exception
-{
-private:
-    string message; 
-public:
-    QueueunderflowException(const string &msg) : message(msg) {}
-    const char* what() const noexcept override
-    {
-        return message.c_str();
-    }
-};
+{};
 
 template<class T>
 class Queue
@@ -45,7 +25,7 @@ public:
         }
         else
         {
-            throw QueueoverflowException("Queue is full");
+            throw QueueoverflowException();
         }
     }
 
@@ -57,11 +37,12 @@ public:
             {
                 arr[i] = arr[i + 1];
             }
+            else
+            {
+                throw QueueunderflowException();
+            }
+            
             end--;
-        }
-        else
-        {
-            throw QueueunderflowException("Queue is empty");
         }
     }
 
@@ -100,7 +81,7 @@ int main()
     }
     catch (const QueueoverflowException &e)
     {
-        cout << e.what() << endl;
+        cout << "Caught QueueoverflowException: Queue is full." << endl;
     }
     return 0;
 }
